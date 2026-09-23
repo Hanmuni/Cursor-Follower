@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content h1 {
+  font-size: 48px;
+}
+
+.content p {
+  font-size: 18px;
+  color: #555555;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  border: 2px solid #5b6bff;
+  color: #5b6bff;
+  background-color: rgba(91, 107, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+  font-size: 10px;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(4px);
+}
+
+.is-moving {
+  transform: translate(-50%, -50%) scale(1.5);
+}
