@@ -43,13 +43,10 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
+  top: 0;
+  left: 0;
   pointer-events: none;
-  transition: transform 0.3s ease;
   font-size: 10px;
   transform: translate(-50%, -50%);
   backdrop-filter: blur(4px);
-}
-
-.is-moving {
-  transform: translate(-50%, -50%) scale(1.5);
 }

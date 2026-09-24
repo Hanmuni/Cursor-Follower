@@ -1,6 +1,7 @@
 const circleEl = document.querySelector("#circle");
 
 let isMoving = false;
+const IDLE_TIMEOUT = 100;
 
 const mousePosition = {
   x: 0,
@@ -8,31 +9,33 @@ const mousePosition = {
 };
 
 let mouseStopTimer;
+let frameRequested = false;
 
 const updateUI = () => {
+  frameRequested = false;
   if (isMoving) {
-    circleEl.classList.add("is-moving");
+    circleEl.style.transform = `translate(calc(${mousePosition.x}px - 50%), calc(${mousePosition.y}px - 50%)) scale(1.5)`;
   } else {
-    circleEl.classList.remove("is-moving");
+    circleEl.style.transform = `translate(calc(${mousePosition.x}px - 50%), calc(${mousePosition.y}px - 50%))`;
   }
-
-  circleEl.style.top = `${mousePosition.y}px`;
-  circleEl.style.left = `${mousePosition.x}px`;
 };
 
 const handleMouseMove = (e) => {
   mousePosition.x = e.clientX;
   mousePosition.y = e.clientY;
   isMoving = true;
-  updateUI();
+  if (!frameRequested) {
+    frameRequested = true;
+    requestAnimationFrame(updateUI);
+  }
 
   clearTimeout(mouseStopTimer);
-  mouseStopTimer = setTimeout(handleMouseStop, 100);
+  mouseStopTimer = setTimeout(handleMouseStop, IDLE_TIMEOUT);
 };
 
 const handleMouseStop = () => {
   isMoving = false;
-  updateUI();
+  requestAnimationFrame(updateUI);
 };
 
 window.addEventListener("mousemove", handleMouseMove);
